@@ -30,7 +30,7 @@ type inspectTask struct {
 */
 
 
-type inspectTask struct {
+type InspectTask struct {
 	OID			objectid.ObjectID		`bson:"_id,omitempty"`
 	Name		string				`bson:"name"`
 	Identifier	string				`bson:"identifier"`
@@ -93,7 +93,7 @@ func TestDocumentationExamples() {
 
 	cursor, _ := inspectTasks.Find(context.Background(), bson.NewDocument(bson.EC.String("identifier", "XJ201810311130820372")))
 
-	inspTask := inspectTask{}
+	inspTask := InspectTask{}
 
 	for cursor.Next(context.Background()) {
 		err := cursor.Decode(&inspTask)
@@ -101,8 +101,12 @@ func TestDocumentationExamples() {
 			fmt.Println("errr")
 		}
 
+		createdBy := inspTask.CreatedBy
+		createdTime := inspTask.CreatedTime
 
-		fmt.Printf("item: %v", inspTask)
-
+		fmt.Printf("item: %v\n", inspTask)
+		fmt.Printf("createdBy: %s\n", createdBy.Hex())
+		fmt.Printf("createdTime: %v\n", createdTime)
 	}
+
 }
