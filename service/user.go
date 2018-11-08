@@ -2,10 +2,22 @@ package service
 
 import (
 	"github.com/gin-gonic/gin/render"
+	"context"
+	"github.com/mongodb/mongo-go-driver/bson"
+	"log"
+	"../model"
 )
 
 func GetFilterData(user render.JSON, target string, scale string) {
 
+	// read documents
+	cursor, err := model.User{}.Find(
+		context.Background(),
+		bson.NewDocument(bson.EC.String("item", "canvas")),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 
