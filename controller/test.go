@@ -24,3 +24,4 @@ func UserNameActionHandler(ctx *gin.Context) {
 	ctx.String(http.StatusOK, message)
 
 }
+
