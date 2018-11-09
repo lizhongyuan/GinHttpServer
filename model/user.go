@@ -1,10 +1,10 @@
 package model
 
+
 import (
 	"github.com/mongodb/mongo-go-driver/bson/objectid"
 	"github.com/mongodb/mongo-go-driver/mongo"
-	"context"
-	"log"
+	"../common"
 )
 
 type manager struct {
@@ -19,14 +19,12 @@ type User struct {
 }
 
 
-// todo: unfinish
-func GetUserModel() {
-	client, err := mongo.Connect(context.Background(), "mongodb://localhost:27017", nil)
-	if err != nil {
-	log.Fatal(err)
-	}
-	db := client.Database("city_mocha")
-	user := db.Collection("users")
 
-	return user
+func GetUserCollection() *mongo.Collection {
+
+	// db, _ = common.GetMongoDatabase()
+
+	collection := common.DB.Collection("users")
+
+	return collection
 }

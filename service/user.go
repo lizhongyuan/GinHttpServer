@@ -1,17 +1,23 @@
 package service
 
+
 import (
 	"github.com/gin-gonic/gin/render"
 	"context"
 	"github.com/mongodb/mongo-go-driver/bson"
 	"log"
 	"../model"
+	"github.com/mongodb/mongo-go-driver/mongo"
 )
+
+
+var userC *mongo.Collection = model.GetUserCollection()
+
 
 func GetFilterData(user render.JSON, target string, scale string) {
 
 	// read documents
-	cursor, err := model.User{}.Find(
+	cursor, err := userC.Find(
 		context.Background(),
 		bson.NewDocument(bson.EC.String("item", "canvas")),
 	)
