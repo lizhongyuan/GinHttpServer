@@ -7,22 +7,22 @@ import (
 	"../common"
 )
 
-type manager struct {
-	name		string			`bson:"name"`
-	contacts	string			`bson:"contacts"`
+
+type Manager struct {
+	name		string			`json:"name" bson:"name"`
+	contacts	string			`json:"contacts" bson:"contacts"`
 }
+
 
 type User struct {
 	OID				objectid.ObjectID		`json:"id" bson:"_id"`
 	Roles			string					`bson:"roles"`
-	Manager			manager					`bson:"manager"`
+	Manager			Manager					`bson:"manager"`
 }
 
 
 
 func GetUserCollection() *mongo.Collection {
-
-	// db, _ = common.GetMongoDatabase()
 
 	collection := common.DB.Collection("users")
 

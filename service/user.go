@@ -2,28 +2,71 @@ package service
 
 
 import (
-	"github.com/gin-gonic/gin/render"
-	"context"
-	"github.com/mongodb/mongo-go-driver/bson"
-	"log"
 	"../model"
 	"github.com/mongodb/mongo-go-driver/mongo"
+
+
+	// "context"
+	// "github.com/mongodb/mongo-go-driver/bson"
+	// "log"
+	// "github.com/mongodb/mongo-go-driver/options"
+	// "fmt"
 )
 
 
 var userC *mongo.Collection = model.GetUserCollection()
 
 
-func GetFilterData(user render.JSON, target string, scale string) {
+func GetFilterData(target string, scale string) []model.Manager {
 
-	// read documents
-	cursor, err := userC.Find(
-		context.Background(),
-		bson.NewDocument(bson.EC.String("item", "canvas")),
-	)
-	if err != nil {
-		log.Fatal(err)
+	var data []model.Manager
+	if target == "manager" && scale == "dealer" {
+		data = getAllManager()
 	}
+
+	return data
+}
+
+
+func getAllManager() []model.Manager {
+
+	retArr := []model.Manager{}
+
+	/*
+	projection := bson.NewDocument(
+		bson.EC.Int32("manager", 1),
+	)
+
+	// cursor, err := userC.Find(
+	cursor, _:= userC.Find(
+		context.Background(),
+		bson.NewDocument(
+			bson.EC.SubDocumentFromElements("manager",
+				bson.EC.String("roles", "dealers"),
+				bson.EC.SubDocumentFromElements("manager", bson.EC.Boolean("$exists", true)),
+			),
+		),
+		options.Find().SetProjection(projection),
+	)
+
+	user := model.User{}
+
+
+	for cursor.Next(context.Background()) {
+
+		err := cursor.Decode(&user)
+		if err != nil {
+			fmt.Println("errr")
+		}
+
+		curItem := model.Manager{}
+		curItem.name = cursor.manager.name
+		curItem.contacts = cursor.manager.contacts;
+		retArr.append(curItem)
+	}
+	*/
+
+	return retArr
 }
 
 
