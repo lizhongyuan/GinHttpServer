@@ -3,9 +3,6 @@ package service
 
 import (
 	"../model"
-	"github.com/mongodb/mongo-go-driver/mongo"
-
-
 	// "context"
 	// "github.com/mongodb/mongo-go-driver/bson"
 	// "log"
@@ -14,7 +11,7 @@ import (
 )
 
 
-var userC *mongo.Collection = model.GetUserCollection()
+// var userC *mongo.Collection = model.GetUserCollection()
 
 
 func GetFilterData(target string, scale string) []model.Manager {

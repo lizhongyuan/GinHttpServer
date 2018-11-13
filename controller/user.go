@@ -8,7 +8,7 @@ import (
 )
 
 
-func getFilterData (ctx *gin.Context) {
+func GetFilterData (ctx *gin.Context) {
 	target := ctx.Query("target")
 	scale := ctx.Query("scale")
 
@@ -17,7 +17,7 @@ func getFilterData (ctx *gin.Context) {
 
 	data := service.GetFilterData(target, scale)
 
-	ctx.String(http.StatusOK, "Hello %v", data)
+	ctx.String(http.StatusOK, "%v", data)
 }
 
 
