@@ -18,8 +18,8 @@ type Size struct {
 
 // Item defines an item
 type Item struct {
-	OID  objectid.ObjectID `bson:"_id,omitempty"` // omitempty not working
-	Item string
+	OID  objectid.ObjectID	`bson:"_id,omitempty"` // omitempty not working
+	Item string				`bson:"item"`
 
 	/*
 	Qty  int
