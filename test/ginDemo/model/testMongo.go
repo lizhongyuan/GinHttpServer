@@ -29,6 +29,7 @@ type Item struct {
 }
 
 func main() {
+
 	// connect to MongoDB
 	client, err := mongo.Connect(context.Background(), "mongodb://localhost:27017", nil)
 	if err != nil {
@@ -50,6 +51,13 @@ func main() {
 	fmt.Printf("result = %#v\n", result)
 	*/
 
+
+
+
+
+	itemRead := Item{}
+
+
 	// read documents
 	cursor, err := inventory.Find(
 		context.Background(),
@@ -58,9 +66,19 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	doc := inventory.FindOne(
+		context.Background(),
+		bson.NewDocument(bson.EC.String("item", "canvas")),
+	).Decode(itemRead)
+
+	if doc != nil {
+		log.Fatal(err)
+	}
+
+
 	// defer cursor.Close(context.Background())
 
-	itemRead := Item{}
 	for cursor.Next(context.Background()) {
 		err := cursor.Decode(&itemRead)
 		if err != nil {
